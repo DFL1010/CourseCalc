@@ -1,13 +1,27 @@
+import math
+
+
 class Leg:
     def __init__(self, markA, markB):
         self.markA = markA
         self.markB = markB
 
-    def mLat(self):
+    def _mLat(self):
         return round(((abs(self.markB.lat - self.markA.lat)) / 2), 4) * 60
 
-    def dLong(self):
-        return round(abs(self.markB.ltude - self.markA.ltude), 4) * 60
+    def _dLat(self):
+        return (abs(self.markB.lat - self.markA.lat)) * 60
 
-    def length(self):
+    def _dLong(self):
+        return round(abs(self.markB.longt - self.markA.longt), 4)
+
+    def _dep(self):
+        return (self.dLong() * self.mLat()) * 60
+
+    def distance(self):
+        return math.sqrt((self.dep() ** 2) + (self.dLat() ** 2))
+
+    def tCourse(self):
+        # Tan = (dep / dLat)
+        # Quadrantal notation
         pass

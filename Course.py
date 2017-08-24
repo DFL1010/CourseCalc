@@ -1,6 +1,3 @@
-from Leg import Leg
-
-
 class Course:
     """
     This class takes as arguments the group and course, reads the coursecard
@@ -9,7 +6,6 @@ class Course:
     def __init__(self, group, course):
         self.group = group
         self.course = course
-        self.legs = self.legs()
 
     def legs(self):
         pass
