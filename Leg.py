@@ -23,4 +23,24 @@ class Leg:
 
     def tCourse(self):
         # Quadrantal notation
-        return math.degrees(math.atan(self._dep() / self._dLat()))
+        isN = False
+        isE = False
+        intAngle = math.degrees(math.atan(self._dep() / self._dLat()))
+        if (self.markB.lat - self.markA.lat) > 0:
+            # b is north of a
+            isN = True
+        elif (self.markB.lat - self.markA.lat) < 0:
+            # b is south of a
+            isN = False
+        else:
+            # E/w.Note self._dLat() == 0, so intAngle gives div0 error
+            return "else"
+        if self.MarkB.longt - self.markA.longt > 0:
+            # b is east of a
+            isE = True
+        elif self.markB.longt - self.markA.longt < 0:
+            # b is west of a
+            isE = False
+        else:
+            # N/S
+            return "else"
