@@ -16,12 +16,11 @@ class Leg:
         return abs(self.markB.longt - self.markA.longt)
 
     def _dep(self):
-        return (self._dLong() * math.cos(self._mLat())) * 60
+        return abs((self._dLong() * math.cos(self._mLat()))) * 60
 
     def distance(self):
         return math.sqrt((self._dep() ** 2) + (self._dLat() ** 2))
 
     def tCourse(self):
-        # Tan = (dep / dLat)
         # Quadrantal notation
-        pass
+        return math.degrees(math.atan(self._dep() / self._dLat()))
