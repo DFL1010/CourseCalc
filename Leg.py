@@ -16,10 +16,10 @@ class Leg:
         return round(abs(self.markB.longt - self.markA.longt), 4)
 
     def _dep(self):
-        return (self.dLong() * self.mLat()) * 60
+        return (self._dLong() * self._mLat()) * 60
 
     def distance(self):
-        return math.sqrt((self.dep() ** 2) + (self.dLat() ** 2))
+        return math.sqrt((self._dep() ** 2) + (self._dLat() ** 2))
 
     def tCourse(self):
         # Tan = (dep / dLat)
