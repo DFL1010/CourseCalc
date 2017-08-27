@@ -25,22 +25,37 @@ class Leg:
         # Quadrantal notation
         isN = False
         isE = False
-        intAngle = math.degrees(math.atan(self._dep() / self._dLat()))
-        if (self.markB.lat - self.markA.lat) > 0:
+        try:
+            intAngle = math.degrees(math.atan(self._dep() / self._dLat()))
+        except ZeroDivisionError:
+            intAngle = 90
+            
+        if self._dLat() > 0:
             # b is north of a
             isN = True
-        elif (self.markB.lat - self.markA.lat) < 0:
+        elif self._dLat() < 0:
             # b is south of a
             isN = False
         else:
             # E/w.Note self._dLat() == 0, so intAngle gives div0 error
-            return "else"
-        if self.MarkB.longt - self.markA.longt > 0:
+            intAngle = 90
+
+        if self._dLong() > 0:
             # b is east of a
             isE = True
-        elif self.markB.longt - self.markA.longt < 0:
+        elif self._dLong() < 0:
             # b is west of a
             isE = False
         else:
             # N/S
             return "else"
+
+        # Calc Quadrantal notation from isN, isE
+        if isN and isE:
+            return intAngle
+        elif isN and not isE:
+            return 360 - intAngle
+        elif not isN and isE:
+            return 180 - intAngle
+        else:
+            return 180 + intAngle
