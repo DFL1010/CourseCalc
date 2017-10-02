@@ -3,12 +3,16 @@ class Course:
     This class takes as arguments the group and course, reads the coursecard
     and creates instances of Leg for each leg of the course.
     """
-    def __init__(self, group, course):
+    def __init__(self, group, course, leglist):
         self.group = group
         self.course = course
+        self.leglist = leglist
 
     def legs(self):
-        pass
+        # Take a list of legs, iterate of over it and output tCourse and distance
+        for leg in self.leglist:
+            print(leg.tCourse())
+            print(leg.distance())
 
     def _readMarks():
         pass
