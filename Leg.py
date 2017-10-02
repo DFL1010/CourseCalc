@@ -18,6 +18,13 @@ class Leg:
     def _dep(self):
         return abs((self._dLong() * math.cos(self._mLat()))) * 60
 
+    def _recurse(self, degs):
+        if degs < 360:
+            return degs
+        else:
+            degs -= 360
+            return self._recurse(degs)
+
     def distance(self):
         return math.sqrt((self._dep() ** 2) + (self._dLat() ** 2))
 
@@ -29,7 +36,7 @@ class Leg:
             intAngle = math.degrees(math.atan(self._dep() / self._dLat()))
         except ZeroDivisionError:
             intAngle = 90
-            
+
         if self._dLat() > 0:
             # b is north of a
             isN = True
@@ -48,14 +55,14 @@ class Leg:
             isE = False
         else:
             # N/S
-            return "else"
+            intAngle = 0
 
         # Calc Quadrantal notation from isN, isE
         if isN and isE:
-            return intAngle
+            return self._recurse(intAngle)
         elif isN and not isE:
-            return 360 - intAngle
+            return self._recurse(360 - intAngle)
         elif not isN and isE:
-            return 180 - intAngle
+            return self._recurse(180 - intAngle)
         else:
-            return 180 + intAngle
+            return self._recurse(180 + intAngle)
