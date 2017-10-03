@@ -2,9 +2,10 @@ import math
 
 
 class Leg:
-    def __init__(self, markA, markB):
+    def __init__(self, markA, markB, winddir):
         self.markA = markA
         self.markB = markB
+        self.winddir = winddir
 
     def _mLat(self):
         return ((abs(self.markB.lat - self.markA.lat)) / 2) * 60
@@ -24,6 +25,14 @@ class Leg:
         else:
             degs -= 360
             return self._recurse(degs)
+
+    def _twa(self):
+        # This should return R/G, 0-180.
+        awa = self.tCourse() - self.winddir
+        if awa > 0:
+            return awa
+        else:
+            return awa+360
 
     def distance(self):
         return math.sqrt((self._dep() ** 2) + (self._dLat() ** 2))

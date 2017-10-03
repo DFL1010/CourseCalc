@@ -9,11 +9,11 @@ c = Mark("C", "Central", 50.5, -5.0)
 d = Mark("D", "D", 50, -5.0)
 
 
-ab = Leg(a, b)
+ab = Leg(a, b, 90)
 #print(ab.tCourse())
 #print(ab.distance())
 
-cd = Leg(c, d)
+cd = Leg(c, d, 90)
 #print(cd.tCourse())
 #print(ab.distance())
 

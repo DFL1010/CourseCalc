@@ -9,10 +9,11 @@ class Course:
         self.leglist = leglist
 
     def legs(self):
-        # Take a list of legs, iterate of over it and output tCourse and distance
+        # Take a list of legs, iterate of over it and output methods
         for leg in self.leglist:
-            print(leg.tCourse())
-            print(leg.distance())
+            print("True course: {}".format(leg.tCourse()))
+            print("Leg Distance: {}".format(leg.distance()))
+            print("TWA: {}".format(leg._twa()))
 
     def _readMarks():
         pass
