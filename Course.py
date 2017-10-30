@@ -1,9 +1,6 @@
 class Course:
-    """
-    This class takes as arguments the group and course, reads the coursecard
-    and creates instances of Leg for each leg of the course.
-    """
-    def __init__(self, group, course, leglist, winddir):
+
+   def __init__(self, group, course, leglist, winddir):
         self.group = group
         self.course = course
         self.leglist = leglist

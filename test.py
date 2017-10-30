@@ -14,15 +14,15 @@ leglist = []
 def inputter():
     print("Enter your first mark (A, B, C, D, E)")
     instr = input()
-    if instr == "A":
+    if instr.upper()[0] == "A":
         marklist.append(a)
-    elif instr == "B":
+    elif instr.upper()[0] == "B":
         marklist.append(b)
-    elif instr == "C":
+    elif instr.upper()[0] == "C":
         marklist.append(c)
-    elif instr == "D":
+    elif instr.upper()[0] == "D":
         marklist.append(d)
-    elif instr == "E":
+    elif instr.upper()[0] == "E":
         marklist.append(e)
 
 done = False
@@ -31,10 +31,10 @@ while not done:
     inputter()
     print("Done? ")
     fin = input()
-    if fin == "Y":
+    if fin.upper() == "Y":
        done = True 
        
-print("\n\n")
+print("\n")
 
 for mark in marklist:
     try:
