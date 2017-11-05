@@ -6,6 +6,7 @@ class Leg:
         self.markA = markA
         self.markB = markB
         self.winddir = winddir
+        self.twa()
 
     def _mLat(self):
         return ((abs(self.markB.lat - self.markA.lat)) / 2) * 60
@@ -26,13 +27,21 @@ class Leg:
             degs -= 360
             return self._recurse(degs)
 
-    def _twa(self):
-        # This should return R/G, 0-180.
-        awa = self.tCourse() - self.winddir
-        if awa > 0:
-            return awa
+    def twa(self):
+        # This should return R/G, 0-180
+        if (self.tCourse() > self.winddir) and (abs(self.tCourse - self.winddir) < 180):
+            self.tack = "Port"
+            self.angle = self.tCourse() - self.winddir
+        elif self.tCourse() < self.winddir and (abs(self.tCourse - self.winddir) < 180):
+            self.tack = "Starboard"
+            self.angle = self.winddir - self.tCourse()
+        elif self.tCourse() == self.winddir:
+            self.tack = "Upwind"
+            self.angle = 0
         else:
-            return awa+360
+            self.tack = "Downwind"
+            self.angle = 180
+        # return "Boat is on {} tack with TWA of {}".format(tack, angle)
 
     def distance(self):
         return math.sqrt((self._dep() ** 2) + (self._dLat() ** 2))

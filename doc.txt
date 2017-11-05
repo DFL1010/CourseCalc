@@ -31,7 +31,9 @@ Course:
         winddir
 
     Methods:
-        legs()
         _readMarks()
+        _readCourseCard()
+        legs()
         isValid()
         length()
+        

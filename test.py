@@ -11,6 +11,7 @@ e = Mark("E", "Testmark2", 49, -4.0)
 marklist = []
 leglist = []
 
+
 def inputter():
     print("Enter your first mark (A, B, C, D, E)")
     instr = input()
@@ -25,6 +26,8 @@ def inputter():
     elif instr.upper()[0] == "E":
         marklist.append(e)
 
+
+"""
 done = False
 
 while not done:
@@ -32,12 +35,11 @@ while not done:
     print("Done? ")
     fin = input()
     if fin.upper() == "Y":
-       done = True 
-       
+       done = True
+       """
 print("\n")
+leglist = [Leg(a, b, 0), Leg(b, c, 0)]
+ab = Course(1, 4, leglist, 270)
+print(ab.length())
 
-for mark in marklist:
-    try:
-        print(mark.name)
-    except AttributeError:
-        print("ERROR: {}".format(mark))
+ab.legs(leglist)
