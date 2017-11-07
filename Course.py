@@ -1,3 +1,7 @@
+from Leg import Leg
+from Mark import Mark
+
+
 class Course:
 
     def __init__(self, group, course, leglist, winddir):
@@ -5,6 +9,8 @@ class Course:
         self.course = course
         self.leglist = leglist
         self.winddir = winddir
+        self.llegs = list()
+        self.legs()
 
     def _readCourseCard(self):
         with open("CourseCard.csv") as c:
@@ -14,18 +20,17 @@ class Course:
         with open("Buoys10.csv") as f:
             marklist = f.read()
 
-    def legs(self, leglist):
+    def legs(self):
         # Take a list of legs, iterate of over it and output methods
-        for leg in self.leglist:
-            print(leg.tack)
-            print(leg.angle)
+        for i in range(len(self.leglist)):
+            self.llegs.append(Leg(self.leglist[i], self.leglist[i+1], self.winddir))
 
-        def isValid(self):
-            pass
+    def isValid(self):
+        pass
 
     def length(self):
         totallength = 0
-        for leg in self.leglist:
+        for leg in self.llegs:
             totallength += leg.distance()
         return totallength
 #       print("Course Length: {}".format(totallength))

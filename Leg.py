@@ -1,12 +1,24 @@
+from Mark import Mark
 import math
-
+import csv
 
 class Leg:
     def __init__(self, markA, markB, winddir):
         self.markA = markA
         self.markB = markB
         self.winddir = winddir
+        self.tco = self.tCourse()
         self.twa()
+        self.buoylist = list()
+        #self.readmarks(self)
+        #self.buoyinst()
+
+    @staticmethod
+    def readmarks(self):
+        with open("Buoys10.csv") as f:
+            buoyreader = csv.reader(f, delimiter=',')
+            for row in buoyreader:
+                self.buoylist.append(row)
 
     def _mLat(self):
         return ((abs(self.markB.lat - self.markA.lat)) / 2) * 60
@@ -27,15 +39,26 @@ class Leg:
             degs -= 360
             return self._recurse(degs)
 
+    def buoyinst(self):
+        tempmA = list()
+        tempmB = list()
+        for row in self.buoylist:
+            if row[0] == self.markA.code:
+                tempmA.append(row)
+            elif row[0] == self.markB.code:
+                tempmB.append(row)
+        self.markA = Mark(tempmA[0], tempmA[1], tempmA[2], tempmA[3])
+        self.markB = Mark(tempmB[0], tempmB[1], tempmB[2], tempmB[3])
+
     def twa(self):
         # This should return R/G, 0-180
-        if (self.tCourse() > self.winddir) and (abs(self.tCourse - self.winddir) < 180):
+        if (self.tco > self.winddir) and (abs(self.tco - self.winddir) < 180):
             self.tack = "Port"
             self.angle = self.tCourse() - self.winddir
-        elif self.tCourse() < self.winddir and (abs(self.tCourse - self.winddir) < 180):
+        elif self.tco < self.winddir and (abs(self.tco - self.winddir) < 180):
             self.tack = "Starboard"
             self.angle = self.winddir - self.tCourse()
-        elif self.tCourse() == self.winddir:
+        elif self.tco == self.winddir:
             self.tack = "Upwind"
             self.angle = 0
         else:
