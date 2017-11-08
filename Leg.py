@@ -8,10 +8,11 @@ class Leg:
         self.markB = markB
         self.winddir = winddir
         self.tco = self.tCourse()
-        self.twa()
+        self.twatest()
         self.buoylist = list()
         #self.readmarks(self)
         #self.buoyinst()
+        #self.angle = 0
 
     @staticmethod
     def readmarks(self):
@@ -51,7 +52,7 @@ class Leg:
         self.markB = Mark(tempmB[0], tempmB[1], tempmB[2], tempmB[3])
 
     def twa(self):
-        # This should return R/G, 0-180
+        # This should return 0-180
         if (self.tco > self.winddir) and (abs(self.tco - self.winddir) < 180):
             self.tack = "Port"
             self.angle = self.tCourse() - self.winddir
@@ -65,6 +66,21 @@ class Leg:
             self.tack = "Downwind"
             self.angle = 180
         # return "Boat is on {} tack with TWA of {}".format(tack, angle)
+        # if tco = 135 and winddir = 90:
+            # 135-90
+        # if tco = 135 and winddir = 150:
+            # 150 - 135
+        # if tco = 45 and winddir = 315:
+            # 45
+    def twatest(self):
+        # if abs(a-b) > 180:
+            # 360 - (abs(a-b))
+        # else:
+            # abs(a-b)
+        # a = targetA - sourceA
+        # a = (a + 180) % 360 - 180
+        a = self.tco - self.winddir
+        self.angle = abs((a + 180) % 360 -180)
 
     def distance(self):
         return math.sqrt((self._dep() ** 2) + (self._dLat() ** 2))
@@ -72,6 +88,7 @@ class Leg:
     def tCourse(self):
         # Quadrantal notation
         isN = False
+
         isE = False
         try:
             intAngle = math.degrees(math.atan(self._dep() / self._dLat()))

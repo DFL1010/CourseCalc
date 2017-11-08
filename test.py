@@ -2,43 +2,48 @@ from Mark import Mark
 from Leg import Leg
 from Course import Course
 
-
-marklist = []
-leglist = []
-
 a = Mark('A','Northern',50.135,-5.042)
-b = Mark('B','Bay' ,50.108,-5.0)
+b = Mark('B','Bay',50.108,-5.0)
 c = Mark('C','Central',50.12,-5.033)
 cn = Mark('Cn','SKB Sails',50.145,-5.02)
+gy = Mark('Gy',"Choak’s Pasties",50.138,-5.06)
+h = Mark('H','Helston',50.093,-5.013)
+hd = Mark('Hd','Hine-Downing',50.138,-5.042)
+m = Mark('M','The Cove Restaurant',50.125,-5.08)
+n = Mark('N','Nare',50.089,-5.082)
+ow = Mark('Ow','Old Wall',50.123,-5.009)
+p = Mark('P','Pendennis Shipyard',50.146,-5.035)
+pb = Mark('Pb',"Pasco’s Boatyard",50.179,-5.024)
+ph = Mark('Ph','Porthallow',50.085,-5.055)
+pw = Mark('Pw','Mylor Yacht Harbour',50.175,-5.04)
+r = Mark('R','Meudon Hotel',50.11,-5.07)
+s = Mark('S','Sunbeam',50.166,-5.045)
+sn = Mark('Sn','Sailtech',50.155,-5.03)
+t = Mark('T','Falmouth Boat Construction',50.161,-5.05)
+w = Mark('W','Rustler Yachts',50.16,-5.032)
+wt = Mark('Wt','Ancasta',50.169,-5.032)
+z = Mark('Z','Penrose Sails',50.136,-5.018)
+br = Mark('Br','Black Rock',50.145,-5.029)
+ca = Mark('Ca','Castle',50.15,-5.027)
+sm = Mark('Sm','St Mawes',50.152,-5.024)
+g = Mark('G','The Governor',50.153,-5.04)
+wn = Mark('Wn','West Narrows',50.157,-5.035)
+en = Mark('En','East Narrows',50.157,-5.032)
+v = Mark('V','The Vilt',50.166,-5.038)
+nb = Mark('Nb','Northbank',50.172,-5.038)
+j = Mark('J','St Just',50.174,-5.029)
+me = Mark('Me','Messack',50.188,-5.037)
+ck = Mark('Ck','Carrick',50.193,-5.046)
+pill = Mark('Pill','Pill',50.201,-5.04)
+re = Mark('Re','Restronguet',50.197,-5.047)
+tu = Mark('Tu','Turnaware',50.195,-5.032)
+gr = Mark('Gr','Greatwood',50.186,-5.044)
+jb = Mark('Jb','JB',50.187,-5.032)
+we = Mark('We','Windward',50.182,-5.042)
 
-"""
-def inputter():
-    print("Enter your first mark (A, B, C, D, E)")
-    instr = input()
-    if instr.upper()[0] == "A":
-        marklist.append(a)
-    elif instr.upper()[0] == "B":
-        marklist.append(b)
-    elif instr.upper()[0] == "C":
-        marklist.append(c)
-
-dcab = Course(1, 4, [d, c, a, b], 180)
-print(dcab.leglist)
-    elif instr.upper()[0] == "D":
-        marklist.append(d)
-    elif instr.upper()[0] == "E":
-        marklist.append(e)
-"""
-
-"""
-done = False
-
-while not done:
-    inputter()
-    print("Done? ")
-    fin = input()
-    if fin.upper() == "Y":
-       done = True
-       """
-ab = Course(1, 3, [Leg(a, c, 180), Leg(b, cn, 180)], 180)
-print(ab.leglist)
+outlst = list()
+leglist = [Leg(j, jb, 360), Leg(jb, gr, 360), Leg(gr, j, 360)]
+for leg in leglist:
+    #outlst.append((round(leg.distance(), 2), leg.twatest()))
+    print(leg.angle)
+print(outlst)
