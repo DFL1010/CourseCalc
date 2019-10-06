@@ -1,0 +1,39 @@
+Classes:
+    Mark
+    Leg
+    Course
+
+Mark:
+    Effectively a Typedef
+    Init method with code, name, lat and long
+
+Leg:
+    Attributes:
+        Mark A
+        Mark B
+        winddir
+    
+    Methods:
+        _mLat()
+        _dLat()
+        _dLong()
+        _dep()
+        _recurse()
+        _twa()
+        distance()
+        tCourse()
+
+Course:
+    Attributes:
+        group
+        course
+        leglist
+        winddir
+
+    Methods:
+        _readMarks()
+        _readCourseCard()
+        legs()
+        isValid()
+        length()
+        

@@ -1,10 +1,25 @@
+from Mark import Mark
 import math
-
+import csv
 
 class Leg:
-    def __init__(self, markA, markB):
+    def __init__(self, markA, markB, winddir):
         self.markA = markA
         self.markB = markB
+        self.winddir = winddir
+        self.tco = self.tCourse()
+        self.twatest()
+        self.buoylist = list()
+        #self.readmarks(self)
+        #self.buoyinst()
+        #self.angle = 0
+
+    @staticmethod
+    def readmarks(self):
+        with open("Buoys10.csv") as f:
+            buoyreader = csv.reader(f, delimiter=',')
+            for row in buoyreader:
+                self.buoylist.append(row)
 
     def _mLat(self):
         return ((abs(self.markB.lat - self.markA.lat)) / 2) * 60
@@ -16,12 +31,100 @@ class Leg:
         return abs(self.markB.longt - self.markA.longt)
 
     def _dep(self):
+<<<<<<< HEAD
+        return abs((self._dLong() * math.cos(self._mLat()))) * 60
+
+    def _recurse(self, degs):
+        if degs < 360:
+            return degs
+        else:
+            degs -= 360
+            return self._recurse(degs)
+
+    def buoyinst(self):
+        tempmA = list()
+        tempmB = list()
+        for row in self.buoylist:
+            if row[0] == self.markA.code:
+                tempmA.append(row)
+            elif row[0] == self.markB.code:
+                tempmB.append(row)
+        self.markA = Mark(tempmA[0], tempmA[1], tempmA[2], tempmA[3])
+        self.markB = Mark(tempmB[0], tempmB[1], tempmB[2], tempmB[3])
+
+    def twa(self):
+        # This should return 0-180
+        if (self.tco > self.winddir) and (abs(self.tco - self.winddir) < 180):
+            self.tack = "Port"
+            self.angle = self.tCourse() - self.winddir
+        elif self.tco < self.winddir and (abs(self.tco - self.winddir) < 180):
+            self.tack = "Starboard"
+            self.angle = self.winddir - self.tCourse()
+        elif self.tco == self.winddir:
+            self.tack = "Upwind"
+            self.angle = 0
+        else:
+            self.tack = "Downwind"
+            self.angle = 180
+        # return "Boat is on {} tack with TWA of {}".format(tack, angle)
+        # if tco = 135 and winddir = 90:
+            # 135-90
+        # if tco = 135 and winddir = 150:
+            # 150 - 135
+        # if tco = 45 and winddir = 315:
+            # 45
+    def twatest(self):
+        # if abs(a-b) > 180:
+            # 360 - (abs(a-b))
+        # else:
+            # abs(a-b)
+        # a = targetA - sourceA
+        # a = (a + 180) % 360 - 180
+        a = self.tco - self.winddir
+        self.angle = abs((a + 180) % 360 -180)
+=======
         return (self._dLong() * math.cos(self._mLat())) * 60
+>>>>>>> Buoy
 
     def distance(self):
         return round(math.sqrt((self._dep() ** 2) + (self._dLat() ** 2)), 4)
 
     def tCourse(self):
-        # Tan = (dep / dLat)
         # Quadrantal notation
-        pass
+        isN = False
+
+        isE = False
+        try:
+            intAngle = math.degrees(math.atan(self._dep() / self._dLat()))
+        except ZeroDivisionError:
+            intAngle = 90
+
+        if self._dLat() > 0:
+            # b is north of a
+            isN = True
+        elif self._dLat() < 0:
+            # b is south of a
+            isN = False
+        else:
+            # E/w.Note self._dLat() == 0, so intAngle gives div0 error
+            intAngle = 90
+
+        if self._dLong() > 0:
+            # b is east of a
+            isE = True
+        elif self._dLong() < 0:
+            # b is west of a
+            isE = False
+        else:
+            # N/S
+            intAngle = 0
+
+        # Calc Quadrantal notation from isN, isE
+        if isN and isE:
+            return self._recurse(intAngle)
+        elif isN and not isE:
+            return self._recurse(360 - intAngle)
+        elif not isN and isE:
+            return self._recurse(180 - intAngle)
+        else:
+            return self._recurse(180 + intAngle)
