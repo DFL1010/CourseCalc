@@ -31,6 +31,7 @@ class Leg:
         return abs(self.markB.longt - self.markA.longt)
 
     def _dep(self):
+<<<<<<< HEAD
         return abs((self._dLong() * math.cos(self._mLat()))) * 60
 
     def _recurse(self, degs):
@@ -81,9 +82,12 @@ class Leg:
         # a = (a + 180) % 360 - 180
         a = self.tco - self.winddir
         self.angle = abs((a + 180) % 360 -180)
+=======
+        return (self._dLong() * math.cos(self._mLat())) * 60
+>>>>>>> Buoy
 
     def distance(self):
-        return math.sqrt((self._dep() ** 2) + (self._dLat() ** 2))
+        return round(math.sqrt((self._dep() ** 2) + (self._dLat() ** 2)), 4)
 
     def tCourse(self):
         # Quadrantal notation
