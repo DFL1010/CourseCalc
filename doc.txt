@@ -4,7 +4,6 @@ Classes:
     Course
 
 Mark:
-    Effectively a Typedef
     Init method with code, name, lat and long
 
     Methods:
