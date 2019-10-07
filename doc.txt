@@ -4,15 +4,17 @@ Classes:
     Course
 
 Mark:
-    Effectively a Typedef
     Init method with code, name, lat and long
+
+    Methods:
+      describe()
 
 Leg:
     Attributes:
         Mark A
         Mark B
         winddir
-    
+
     Methods:
         _mLat()
         _dLat()
@@ -36,4 +38,3 @@ Course:
         legs()
         isValid()
         length()
-        
